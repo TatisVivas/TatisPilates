@@ -9,7 +9,7 @@
         :root {
             --primary-coral: #f7a099;
             --soft-pink: #fdf2f1;
-            --soft-bg: #e8e6e1;
+            --soft-bg: #f5f3f0;
             --text-dark: #555;
         }
 
@@ -24,48 +24,31 @@
             padding: 20px;
         }
 
-        /* Título Girly */
-        .main-header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
+        .main-header { text-align: center; margin-bottom: 25px; }
         .main-header h1 {
             font-family: 'Dancing Script', cursive;
             font-size: 3.5rem;
             color: #d88a83;
             margin: 0;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
         }
-
-        .main-header span {
-            font-size: 1.2rem;
-            color: #b0b0b0;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-        }
+        .main-header span { font-size: 1rem; color: #b0b0b0; letter-spacing: 4px; text-transform: uppercase; }
 
         .container {
             display: flex;
             width: 100%;
             max-width: 1000px;
             background: white;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            border-radius: 20px; /* Más redondeado para verse más suave */
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+            border-radius: 25px;
             overflow: hidden;
             flex-direction: row;
         }
 
         @media (max-width: 768px) {
-            .container {
-                flex-direction: column;
-                height: auto;
-                min-height: 80vh;
-                border-radius: 20px;
-            }
+            .container { flex-direction: column; border-radius: 25px; }
             .main-header h1 { font-size: 2.8rem; }
-            .details-panel { padding: 30px 20px !important; text-align: center; }
-            .calendar-panel { padding: 20px !important; }
+            .details-panel { padding: 40px 25px !important; text-align: center; }
+            .calendar-panel { padding: 25px !important; }
         }
 
         .details-panel {
@@ -76,10 +59,11 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            min-height: 300px;
         }
 
-        .details-panel h2 { margin: 0; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; opacity: 0.8; }
-        .details-panel h1 { font-size: 2.2rem; margin: 15px 0; line-height: 1.2; font-weight: bold; }
+        .details-panel h2 { margin: 0; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; opacity: 0.9; }
+        .details-panel h1 { font-size: 2.3rem; margin: 15px 0; line-height: 1.2; font-weight: bold; }
         
         .play-button {
             display: inline-block;
@@ -90,65 +74,50 @@
             text-decoration: none;
             font-weight: bold;
             text-align: center;
-            margin-top: 10px;
+            margin-top: 15px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: 0.3s;
         }
 
-        .calendar-panel {
-            flex: 1.2;
-            padding: 40px;
-            color: var(--text-dark);
-            background: white;
-        }
+        .calendar-panel { flex: 1.2; padding: 40px; color: var(--text-dark); background: white; }
+        .month-name { font-weight: bold; font-size: 1.4rem; color: #d88a83; text-align: center; margin-bottom: 25px; }
 
-        .calendar-header { margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
-        .month-name { font-weight: bold; font-size: 1.3rem; color: #d88a83; text-align: center; }
-
-        .grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; text-align: center; }
-        .day-name { font-size: 0.7rem; font-weight: bold; color: #bbb; padding-bottom: 10px; }
+        .grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; text-align: center; }
+        .day-name { font-size: 0.75rem; font-weight: bold; color: #ccc; padding-bottom: 15px; }
 
         .day {
             padding: 15px 0;
-            font-size: 1rem;
+            font-size: 1.05rem;
             cursor: pointer;
-            border-radius: 15px;
-            transition: all 0.2s;
+            border-radius: 18px;
+            transition: 0.2s;
             position: relative;
         }
 
         .day:hover { background: var(--soft-pink); color: var(--primary-coral); }
         .day.active { background: var(--primary-coral) !important; color: white !important; font-weight: bold; }
 
-        .dot {
-            width: 5px;
-            height: 5px;
-            background: var(--primary-coral);
-            border-radius: 50%;
-            margin: 3px auto 0;
-        }
+        .dot { width: 5px; height: 5px; background: var(--primary-coral); border-radius: 50%; margin: 4px auto 0; }
         .day.active .dot { background: white; }
     </style>
 </head>
 <body>
 
     <div class="main-header">
-        <span>Self Care Journey</span>
+        <span>Glow Up Planner</span>
         <h1>Pilates para Tatis</h1>
     </div>
 
     <div class="container">
         <div class="details-panel" id="detailsPanel">
-            <h2 id="displayDate">HOLA PRECIOSA</h2>
-            <h1 id="workoutTitle">Escoge un día para brillar</h1>
-            <p id="descText" style="font-size: 1rem; opacity: 0.9; margin-bottom: 20px;"></p>
-            <a href="#" id="playBtn" class="play-button" target="_blank" style="display:none;">▶ EMPEZAR RUTINA</a>
+            <h2 id="displayDate">HOLA LINDA</h2>
+            <h1 id="workoutTitle">Escoge un día para empezar</h1>
+            <p id="descText" style="font-size: 1.1rem; opacity: 0.95; margin-bottom: 20px; line-height: 1.5;"></p>
+            <a href="#" id="playBtn" class="play-button" target="_blank" style="display:none;">▶ REPRODUCIR CLASE</a>
         </div>
 
         <div class="calendar-panel">
-            <div class="calendar-header">
-                <div class="month-name">MAYO 2026</div>
-            </div>
-            
+            <div class="month-name">MAYO 2026</div>
             <div class="grid" id="calendarGrid">
                 <div class="day-name">LU</div><div class="day-name">MA</div><div class="day-name">MI</div>
                 <div class="day-name">JU</div><div class="day-name">VI</div><div class="day-name">SA</div><div class="day-name">DO</div>
@@ -158,41 +127,41 @@
 
 <script>
     const workouts = [
-        { d: 27, m: 'ABR', t: 'Full Body Pilates', v: 'iDB5P9G-gbs', desc: 'Empezamos con energía.' },
-        { d: 28, m: 'ABR', t: 'Tonificar y Alargar', v: 'Q88LLYMkaT4', desc: 'Postura y control.' },
-        { d: 29, m: 'ABR', t: 'Yoga Suave', v: 'M3-G679uXHM', desc: 'Recuperación activa.' },
-        { d: 30, m: 'ABR', t: 'Hourglass (Cintura)', v: 'ct5l12rRHm8', desc: 'Sesión rápida.' },
-        { d: 1, m: 'MAY', t: 'Full Body Pilates', v: 'iDB5P9G-gbs', desc: 'No pierdas el ritmo.' },
-        { d: 2, m: 'MAY', t: 'Tonificación', v: 'Q88LLYMkaT4', desc: '¡Casi una semana!' },
-        { d: 3, m: 'MAY', t: 'Descanso Total', v: '', desc: 'Relájate hoy.' },
-        { d: 4, m: 'MAY', t: 'Reto Día 1', v: '354ezj2UHdM', desc: 'Más intensidad.' },
-        { d: 5, m: 'MAY', t: 'Hourglass', v: 'FuTiqNBj_vc', desc: 'Zona media.' },
-        { d: 6, m: 'MAY', t: 'Estiramientos', v: '8v4XmH0M_U8', desc: 'Estira y respira.' },
-        { d: 7, m: 'MAY', t: 'Reto Día 1', v: '354ezj2UHdM', desc: 'Consistencia.' },
-        { d: 8, m: 'MAY', t: 'Full Body', v: 'Q88LLYMkaT4', desc: 'Actívate.' },
-        { d: 9, m: 'MAY', t: 'Hourglass', v: 'ct5l12rRHm8', desc: 'Rápido y eficaz.' },
-        { d: 10, m: 'MAY', t: 'Descanso Total', v: '', desc: 'Recupera.' },
-        { d: 11, m: 'MAY', t: 'Doble: FB + HG', v: 'iDB5P9G-gbs', desc: 'Nivel avanzado.' },
-        { d: 12, m: 'MAY', t: 'Full Body', v: 'Q88LLYMkaT4', desc: 'Focalizado.' },
-        { d: 13, m: 'MAY', t: 'Movilidad', v: 'M3-G679uXHM', desc: 'Suelta tensiones.' },
-        { d: 14, m: 'MAY', t: 'Doble: Reto + HG', v: '354ezj2UHdM', desc: 'Dalo todo.' },
-        { d: 15, m: 'MAY', t: 'Quema Grasa', v: 'iDB5P9G-gbs', desc: 'Cardio pilates.' },
-        { d: 16, m: 'MAY', t: 'Full Body', v: 'Q88LLYMkaT4', desc: 'Sigue así.' },
-        { d: 17, m: 'MAY', t: 'Descanso Total', v: '', desc: 'Pausa.' },
-        { d: 18, m: 'MAY', t: 'Reto Día 1', v: '354ezj2UHdM', desc: 'Semana final.' },
-        { d: 19, m: 'MAY', t: 'Full Body', v: 'iDB5P9G-gbs', desc: 'A tope.' },
-        { d: 20, m: 'MAY', t: 'Yoga', v: '8v4XmH0M_U8', desc: 'Calma.' },
-        { d: 21, m: 'MAY', t: 'Reto Día 1', v: '354ezj2UHdM', desc: '¡Ya casi!' },
-        { d: 22, m: 'MAY', t: 'Doble Hourglass', v: 'ct5l12rRHm8', desc: 'Cintura.' },
-        { d: 23, m: 'MAY', t: 'Full Body', v: 'Q88LLYMkaT4', desc: 'Último round.' },
-        { d: 24, m: 'MAY', t: 'Descanso Total', v: '', desc: '¡Meta!' },
-        { d: 25, m: 'MAY', t: 'Repite Favorito', v: '354ezj2UHdM', desc: 'Bonus.' },
-        { d: 26, m: 'MAY', t: 'Full Body', v: 'Q88LLYMkaT4', desc: 'Extra.' },
-        { d: 27, m: 'MAY', t: 'Descanso Activo', v: 'M3-G679uXHM', desc: 'Suave.' },
-        { d: 28, m: 'MAY', t: 'Full Body', v: 'iDB5P9G-gbs', desc: 'Fuerza.' },
-        { d: 29, m: 'MAY', t: 'Hourglass', v: 'FuTiqNBj_vc', desc: 'Esculpir.' },
-        { d: 30, m: 'MAY', t: 'Full Body', v: 'Q88LLYMkaT4', desc: 'Finalizando.' },
-        { d: 31, m: 'MAY', t: '¡Lo lograste!', v: '', desc: '¡Bravo!' }
+        { d: 27, m: 'ABR', t: 'Full Body Pilates', v: 'iDB5P9G-gbs', desc: 'Empezamos con energía y control.' },
+        { d: 28, m: 'ABR', t: 'Tonificar y Alargar', v: 'Q88LLYMkaT4', desc: 'Enfoque en postura y abdomen.' },
+        { d: 29, m: 'ABR', t: 'Descanso Activo', v: '', desc: 'Hoy toca caminata ligera o estiramientos suaves en casa. ¡Mueve tu cuerpo sin prisa!' },
+        { d: 30, m: 'ABR', t: 'Hourglass (Cintura)', v: 'ct5l12rRHm8', desc: 'Sesión rápida para esculpir curvas.' },
+        { d: 1, m: 'MAY', t: 'Full Body Pilates', v: 'iDB5P9G-gbs', desc: '¡Bienvenido mayo! Mantente constante.' },
+        { d: 2, m: 'MAY', t: 'Tonificación', v: 'Q88LLYMkaT4', desc: 'Cerrando la semana con fuerza.' },
+        { d: 3, m: 'MAY', t: 'Descanso Total', v: '', desc: 'Relájate, hidrátate y disfruta tu domingo.' },
+        { d: 4, m: 'MAY', t: 'Reto Día 1', v: '354ezj2UHdM', desc: 'Subimos la intensidad. ¡Tú puedes!' },
+        { d: 5, m: 'MAY', t: 'Hourglass', v: 'FuTiqNBj_vc', desc: 'Enfoque total en zona media.' },
+        { d: 6, m: 'MAY', t: 'Descanso Activo', v: '', desc: 'Paseo al aire libre o movilidad de hombros y espalda.' },
+        { d: 7, m: 'MAY', t: 'Reto Día 1', v: '354ezj2UHdM', desc: 'Repetimos para dominar los movimientos.' },
+        { d: 8, m: 'MAY', t: 'Full Body', v: 'Q88LLYMkaT4', desc: 'Siéntete fuerte y activa.' },
+        { d: 9, m: 'MAY', t: 'Hourglass', v: 'ct5l12rRHm8', desc: 'Definición rápida antes del descanso.' },
+        { d: 10, m: 'MAY', t: 'Descanso Total', v: '', desc: 'Pausa necesaria para que el músculo crezca.' },
+        { d: 11, m: 'MAY', t: 'Doble: FB + HG', v: 'iDB5P9G-gbs', desc: 'Nivel avanzado: Full Body y Cintura.' },
+        { d: 12, m: 'MAY', t: 'Full Body', v: 'Q88LLYMkaT4', desc: 'Tonificación suave pero efectiva.' },
+        { d: 13, m: 'MAY', t: 'Descanso Activo', v: '', desc: 'Estiramientos profundos de piernas y cadera.' },
+        { d: 14, m: 'MAY', t: 'Doble: Reto + HG', v: '354ezj2UHdM', desc: '¡Dándolo todo a mitad de mes!' },
+        { d: 15, m: 'MAY', t: 'Quema Grasa', v: 'iDB5P9G-gbs', desc: 'Pilates con ritmo para sudar un poquito.' },
+        { d: 16, m: 'MAY', t: 'Full Body', v: 'Q88LLYMkaT4', desc: 'Cerrando la tercera semana.' },
+        { d: 17, m: 'MAY', t: 'Descanso Total', v: '', desc: 'Día de autocuidado y paz.' },
+        { d: 18, m: 'MAY', t: 'Reto Día 1', v: '354ezj2UHdM', desc: 'Iniciamos la recta final.' },
+        { d: 19, m: 'MAY', t: 'Full Body', v: 'iDB5P9G-gbs', desc: 'Cuerpo tonificado y mente clara.' },
+        { d: 20, m: 'MAY', t: 'Descanso Activo', v: '', desc: 'Camina 20 minutos o haz movilidad articular.' },
+        { d: 21, m: 'MAY', t: 'Reto Día 1', v: '354ezj2UHdM', desc: '¡Casi llegamos a la meta!' },
+        { d: 22, m: 'MAY', t: 'Doble Hourglass', v: 'ct5l12rRHm8', desc: 'Especial para cintura de avispa.' },
+        { d: 23, m: 'MAY', t: 'Full Body', v: 'Q88LLYMkaT4', desc: 'Último entrenamiento intenso.' },
+        { d: 24, m: 'MAY', t: 'Descanso Total', v: '', desc: '¡Lo lograste! Celebra tu constancia.' },
+        { d: 25, m: 'MAY', t: 'Repite Favorito', v: '354ezj2UHdM', desc: 'Día extra para las más motivadas.' },
+        { d: 26, m: 'MAY', t: 'Full Body', v: 'Q88LLYMkaT4', desc: 'Mantenimiento ligero.' },
+        { d: 27, m: 'MAY', t: 'Descanso Activo', v: '', desc: 'Día de relax y estiramiento.' },
+        { d: 28, m: 'MAY', t: 'Full Body', v: 'iDB5P9G-gbs', desc: 'Fuerza y control mental.' },
+        { d: 29, m: 'MAY', t: 'Hourglass', v: 'FuTiqNBj_vc', desc: 'Esculpiendo el cuerpo.' },
+        { d: 30, m: 'MAY', t: 'Full Body', v: 'Q88LLYMkaT4', desc: 'Finalizando el mes con todo.' },
+        { d: 31, m: 'MAY', t: '¡Bravo Tatis!', v: '', desc: 'Orgullosa de tu proceso este mes. ✨' }
     ];
 
     const grid = document.getElementById('calendarGrid');
@@ -222,6 +191,5 @@
         grid.appendChild(div);
     });
 </script>
-
 </body>
 </html>
