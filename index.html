@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Glow Up Trimestral Tatis</title>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+
     <style>
         :root {
             --primary-coral: #f7a099;
@@ -24,14 +25,31 @@
             padding: 20px;
         }
 
-        .main-header { text-align: center; margin-bottom: 20px; }
-        .main-header h1 { font-family: 'Dancing Script', cursive; font-size: 3.2rem; color: #d88a83; margin: 0; }
-        .main-header span { font-size: 0.9rem; color: #b0b0b0; letter-spacing: 4px; text-transform: uppercase; }
+        .main-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .main-header h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.2rem;
+            color: #d88a83;
+            margin: 0;
+        }
+
+        .main-header span {
+            font-size: 0.9rem;
+            color: #b0b0b0;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
 
         .month-selector {
             display: flex;
             gap: 10px;
             margin-bottom: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
         .month-btn {
@@ -60,11 +78,6 @@
             overflow: hidden;
         }
 
-        @media (max-width: 768px) {
-            .container { flex-direction: column; }
-            .details-panel { padding: 40px 25px !important; text-align: center; min-height: 280px !important; }
-        }
-
         .details-panel {
             flex: 1;
             background-color: var(--primary-coral);
@@ -76,9 +89,21 @@
             min-height: 400px;
         }
 
-        .details-panel h2 { margin: 0; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; opacity: 0.9; }
-        .details-panel h1 { font-size: 2.2rem; margin: 15px 0; line-height: 1.2; font-weight: bold; }
-        
+        .details-panel h2 {
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 0;
+            opacity: 0.8;
+        }
+
+        .details-panel h1 {
+            font-size: 2.2rem;
+            margin: 15px 0;
+            line-height: 1.2;
+            font-weight: bold;
+        }
+
         .play-button {
             display: inline-block;
             background: white;
@@ -90,11 +115,34 @@
             text-align: center;
             margin-top: 15px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: 0.3s;
         }
 
-        .calendar-panel { flex: 1.2; padding: 30px; color: var(--text-dark); background: white; }
-        .grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; text-align: center; }
-        .day-name { font-size: 0.7rem; font-weight: bold; color: #ccc; padding-bottom: 10px; }
+        .play-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .calendar-panel {
+            flex: 1.2;
+            padding: 30px;
+            color: var(--text-dark);
+            background: white;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+            text-align: center;
+        }
+
+        .day-name {
+            font-size: 0.7rem;
+            font-weight: bold;
+            color: #ccc;
+            padding-bottom: 10px;
+        }
 
         .day {
             padding: 12px 0;
@@ -103,15 +151,54 @@
             border-radius: 12px;
             transition: 0.2s;
             position: relative;
+            min-height: 35px;
         }
 
-        .day:hover:not(.empty) { background: var(--soft-pink); color: var(--primary-coral); }
-        .day.active { background: var(--primary-coral) !important; color: white !important; }
+        .day:hover:not(.empty) {
+            background: var(--soft-pink);
+            color: var(--primary-coral);
+        }
 
-        .dot { width: 4px; height: 4px; background: var(--primary-coral); border-radius: 50%; margin: 2px auto 0; }
-        .day.active .dot { background: white; }
+        .day.active {
+            background: var(--primary-coral) !important;
+            color: white !important;
+            font-weight: bold;
+        }
+
+        .day.empty {
+            cursor: default;
+        }
+
+        .dot {
+            width: 4px;
+            height: 4px;
+            background: var(--primary-coral);
+            border-radius: 50%;
+            margin: 2px auto 0;
+        }
+
+        .day.active .dot {
+            background: white;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .details-panel {
+                padding: 40px 25px !important;
+                text-align: center;
+                min-height: 280px !important;
+            }
+
+            .calendar-panel {
+                padding: 25px 15px;
+            }
+        }
     </style>
 </head>
+
 <body>
 
     <div class="main-header">
@@ -120,7 +207,7 @@
     </div>
 
     <div class="month-selector">
-        <button id="btn-mayo" class="month-btn active" onclick="changeMonth('mayo')">MAYO</button>
+        <button id="btn-mayo" class="month-btn active" onclick="changeMonth('mayo')">MAYO / ABRIL</button>
         <button id="btn-junio" class="month-btn" onclick="changeMonth('junio')">JUNIO</button>
         <button id="btn-julio" class="month-btn" onclick="changeMonth('julio')">JULIO</button>
     </div>
@@ -134,74 +221,167 @@
         </div>
 
         <div class="calendar-panel">
-            <div class="grid" id="calendarGrid">
-                </div>
+            <div class="grid" id="calendarGrid"></div>
         </div>
     </div>
 
 <script>
+    const vids = {
+        fb: {
+            t: '20 MIN Full Body Pilates',
+            v: 'iDB5P9G-gbs',
+            desc: 'Rutina completa para tonificar todo el cuerpo.'
+        },
+        tn: {
+            t: 'Tonificar y Alargar',
+            v: 'Q88LLYMkaT4',
+            desc: 'Enfoque en mejorar la postura y estilizar.'
+        },
+        hg1: {
+            t: 'Hourglass (Cintura)',
+            v: 'ct5l12rRHm8',
+            desc: 'Focalizado en abdomen y cintura de avispa.'
+        },
+        hg2: {
+            t: 'Hourglass Pro',
+            v: 'FuTiqNBj_vc',
+            desc: 'Definición intensa de la zona media.'
+        },
+        reto: {
+            t: 'Reto Día 1',
+            v: '354ezj2UHdM',
+            desc: 'Aumentamos la intensidad y el control muscular.'
+        },
+        restA: {
+            t: 'Descanso Activo',
+            v: '',
+            desc: 'Hoy toca caminata ligera o estiramientos suaves.'
+        },
+        restT: {
+            t: 'Descanso Total',
+            v: '',
+            desc: 'Día libre. ¡Recupera energías para mañana!'
+        }
+    };
+
+    function getWorkout(dayIndex, dayNumber) {
+        let weekDay = dayIndex % 7;
+
+        if (weekDay === 2) return vids.restA;
+        if (weekDay === 6) return vids.restT;
+        if (weekDay === 1 || weekDay === 4) return vids.hg1;
+        if (weekDay === 3) return vids.reto;
+
+        return (dayNumber % 2 === 0) ? vids.fb : vids.tn;
+    }
+
     const data = {
         mayo: [
-            { d: 27, m: 'ABR', t: 'Full Body Pilates', v: 'iDB5P9G-gbs', desc: 'Empezamos con energía.' },
-            { d: 28, m: 'ABR', t: 'Tonificar y Alargar', v: 'Q88LLYMkaT4', desc: 'Postura y control.' },
-            { d: 29, m: 'ABR', t: 'Descanso Activo', v: '', desc: 'Caminata o estiramientos suaves.' },
-            { d: 30, m: 'ABR', t: 'Hourglass', v: 'ct5l12rRHm8', desc: 'Sesión rápida.' },
-            { d: 1, m: 'MAY', t: 'Full Body Pilates', v: 'iDB5P9G-gbs', desc: 'Mantente constante.' },
-            { d: 2, m: 'MAY', t: 'Tonificación', v: 'Q88LLYMkaT4', desc: '¡Cerrando semana!' },
-            { d: 3, m: 'MAY', t: 'Descanso Total', v: '', desc: 'Relax absoluto.' },
-            { d: 4, m: 'MAY', t: 'Reto Día 1', v: '354ezj2UHdM', desc: 'Más intensidad.' },
-            { d: 5, m: 'MAY', t: 'Hourglass', v: 'FuTiqNBj_vc', desc: 'Zona media.' },
-            { d: 6, m: 'MAY', t: 'Descanso Activo', v: '', desc: 'Movilidad articular.' },
-            { d: 7, m: 'MAY', t: 'Reto Día 1', v: '354ezj2UHdM', desc: 'Persistencia.' },
-            { d: 8, m: 'MAY', t: 'Full Body', v: 'Q88LLYMkaT4', desc: 'Cuerpo activo.' },
-            { d: 9, m: 'MAY', t: 'Hourglass', v: 'ct5l12rRHm8', desc: 'Esculpir.' },
-            { d: 10, m: 'MAY', t: 'Descanso Total', v: '', desc: 'Domingo de paz.' }
+            { day: 27, m: 'ABR', ...getWorkout(0, 27) },
+            { day: 28, m: 'ABR', ...getWorkout(1, 28) },
+            { day: 29, m: 'ABR', ...getWorkout(2, 29) },
+            { day: 30, m: 'ABR', ...getWorkout(3, 30) },
+            ...Array.from({ length: 31 }, (_, i) => {
+                let day = i + 1;
+                return {
+                    day: day,
+                    m: 'MAY',
+                    ...getWorkout(i + 4, day)
+                };
+            })
         ],
-        junio: [
-            { d: 1, m: 'JUN', t: 'Reto Intenso', v: '354ezj2UHdM', desc: 'Mes de resistencia.' },
-            { d: 2, m: 'JUN', t: 'Hourglass Pro', v: 'FuTiqNBj_vc', desc: 'Oblicuos marcados.' },
-            { d: 3, m: 'JUN', t: 'Descanso Activo', v: '', desc: 'Paseo consciente.' },
-            { d: 4, m: 'JUN', t: 'Full Body Sculpt', v: 'iDB5P9G-gbs', desc: 'Definición.' },
-            { d: 5, m: 'JUN', t: 'Cardio Pilates', v: 'Q88LLYMkaT4', desc: 'Energía pura.' },
-            { d: 6, m: 'JUN', t: 'Hourglass', v: 'ct5l12rRHm8', desc: 'Cintura.' },
-            { d: 7, m: 'JUN', t: 'Descanso Total', v: '', desc: 'Día de spa en casa.' }
-        ],
+
+        junio: Array.from({ length: 30 }, (_, i) => {
+            let day = i + 1;
+            return {
+                day: day,
+                m: 'JUN',
+                ...getWorkout(i, day)
+            };
+        }),
+
         julio: [
-            { d: 1, m: 'JUL', t: 'Máximo Desafío', v: 'iDB5P9G-gbs', desc: 'Mes de fuerza final.' },
-            { d: 2, m: 'JUL', t: 'Hourglass Extreme', v: 'ct5l12rRHm8', desc: 'Core invencible.' },
-            { d: 3, m: 'JUL', t: 'Descanso Activo', v: '', desc: 'Yoga o estiramientos.' },
-            { d: 4, m: 'JUL', t: 'Reto Final', v: '354ezj2UHdM', desc: '¡Lo estás logrando!' },
-            { d: 5, m: 'JUL', t: 'Total Body Sculpt', v: 'Q88LLYMkaT4', desc: 'Últimos detalles.' }
+            { day: '', empty: true },
+            { day: '', empty: true },
+            ...Array.from({ length: 31 }, (_, i) => {
+                let day = i + 1;
+                return {
+                    day: day,
+                    m: 'JUL',
+                    ...getWorkout(i + 2, day)
+                };
+            })
         ]
     };
 
     function changeMonth(month) {
-        document.querySelectorAll('.month-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.month-btn').forEach(button => {
+            button.classList.remove('active');
+        });
+
         document.getElementById('btn-' + month).classList.add('active');
 
         const grid = document.getElementById('calendarGrid');
-        grid.innerHTML = '<div class="day-name">LU</div><div class="day-name">MA</div><div class="day-name">MI</div><div class="day-name">JU</div><div class="day-name">VI</div><div class="day-name">SA</div><div class="day-name">DO</div>';
+
+        grid.innerHTML = `
+            <div class="day-name">LU</div>
+            <div class="day-name">MA</div>
+            <div class="day-name">MI</div>
+            <div class="day-name">JU</div>
+            <div class="day-name">VI</div>
+            <div class="day-name">SA</div>
+            <div class="day-name">DO</div>
+        `;
 
         data[month].forEach(work => {
             const div = document.createElement('div');
-            div.className = 'day';
-            div.innerHTML = `${work.d}${work.v ? '<div class="dot"></div>' : ''}`;
-            div.onclick = function() {
-                document.querySelectorAll('.day').forEach(d => d.classList.remove('active'));
-                div.classList.add('active');
-                document.getElementById('displayDate').innerText = `${work.d} ${work.m}`;
-                document.getElementById('workoutTitle').innerText = work.t;
-                document.getElementById('descText').innerText = work.desc;
-                const btn = document.getElementById('playBtn');
-                if(work.v) { btn.style.display = 'inline-block'; btn.href = "https://www.youtube.com/watch?v=" + work.v; }
-                else { btn.style.display = 'none'; }
-                if(window.innerWidth < 768) window.scrollTo({top: 0, behavior: 'smooth'});
-            };
+            div.className = 'day' + (work.empty ? ' empty' : '');
+
+            if (work.empty) {
+                div.innerHTML = '';
+            } else {
+                div.innerHTML = `
+                    <span>${work.day}</span>
+                    ${work.v ? '<div class="dot"></div>' : ''}
+                `;
+            }
+
+            if (!work.empty) {
+                div.onclick = function() {
+                    document.querySelectorAll('.day').forEach(day => {
+                        day.classList.remove('active');
+                    });
+
+                    div.classList.add('active');
+
+                    document.getElementById('displayDate').innerText = `${work.day} ${work.m}`;
+                    document.getElementById('workoutTitle').innerText = work.t;
+                    document.getElementById('descText').innerText = work.desc;
+
+                    const btn = document.getElementById('playBtn');
+
+                    if (work.v) {
+                        btn.style.display = 'inline-block';
+                        btn.href = 'https://www.youtube.com/watch?v=' + work.v;
+                    } else {
+                        btn.style.display = 'none';
+                    }
+
+                    if (window.innerWidth < 768) {
+                        window.scrollTo({
+                            top: 0,
+                            behavior: 'smooth'
+                        });
+                    }
+                };
+            }
+
             grid.appendChild(div);
         });
     }
 
     window.onload = () => changeMonth('mayo');
 </script>
+
 </body>
 </html>
